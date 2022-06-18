@@ -22,8 +22,25 @@ function create(user: IUserWithoutId): Promise<IUser> {
     })
 }
 
+function update(id: string, user: IUserWithoutId): Promise<IUser> {
+    return new Promise((resolve, reject) => {
+        const index = users.findIndex((p) => p.id === id);
+        users[index] = {id, ...user};
+        resolve(users[index]);
+    })
+}
+
+function remove(id: string, users: IUser[]): Promise<void> {
+    return new Promise((resolve, reject) => {
+        users = users.filter((p) => p.id !== id);
+        resolve();
+    })
+}
+
 export {
     findAll,
     findById,
-    create
+    create,
+    update,
+    remove
 }

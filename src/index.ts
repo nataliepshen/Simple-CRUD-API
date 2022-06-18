@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 import { config } from 'dotenv';
-import { getAllUsers, getUserById, createUser, updateUser } from './userController';
+import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from './userController';
 
 config();
 
@@ -15,6 +15,9 @@ const server = createServer((req, res) => {
   } else if (req.url?.match(/\/api\/users\/\w+/) && req.method === 'PUT') {
     const id = req.url?.split('/')[3] as string;
     updateUser(req, res, id);
+  } else if (req.url?.match(/\/api\/users\/\w+/) && req.method === 'DELETE') {
+    const id = req.url?.split('/')[3] as string;
+    deleteUser(req, res, id);
   } 
 });
 

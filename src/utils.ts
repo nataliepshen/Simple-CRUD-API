@@ -9,20 +9,28 @@ function getPostData(req: IncomingMessage, res: ServerResponse): Promise<IUserWi
                 body += chunk.toString();
             });
             req.on('end', () => {
-                if (body === '') {
-                    res.writeHead(400, {'Content-Type': 'application/json'});
-                    res.end(JSON.stringify({ message: 'Missing required fields' }));
-                }
-                const { username, age, hobbies}: IUserWithoutId = JSON.parse(body);
-                if (!username || !age || !hobbies) {
-                    res.writeHead(400, {'Content-Type': 'application/json'});
-                    res.end(JSON.stringify({ message: 'Missing required fields' }));
-                } else {
-                    resolve(JSON.parse(body));
+                try {
+                    if (body === '') {
+                        res.writeHead(400, {'Content-Type': 'application/json'});
+                        res.end(JSON.stringify({ message: 'Missing required fields' }));
+                    }
+                    const { username, age, hobbies}: IUserWithoutId = JSON.parse(body);
+                    if (!username || !age || !hobbies) {
+                        res.writeHead(400, {'Content-Type': 'application/json'});
+                        res.end(JSON.stringify({ message: 'Missing required fields' }));
+                    } else {
+                        resolve(JSON.parse(body));
+                    }
+                } catch(error) {
+                    if (error instanceof SyntaxError) {
+                        res.writeHead(400, {'Content-Type': 'application/json'});
+                        res.end(JSON.stringify({ message: 'Bad request' }));
+                    }
                 }
             });
         } catch(error) {
-            reject(error);
+                res.writeHead(400, {'Content-Type': 'application/json'});
+                res.end(JSON.stringify({ message: 'Bad request' }));
         }
     })
 }
