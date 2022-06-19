@@ -10,8 +10,8 @@ async function getAllUsers(req: IncomingMessage, res: ServerResponse): Promise<v
         res.end(JSON.stringify(allUsers));
     }catch(error) {
         res.writeHead(500, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify({message: 'Server down'}));
-    }
+        res.end(JSON.stringify({message: 'Something went wrong on the server'}));
+    };
 };
 
 async function getUserById(req: IncomingMessage, res: ServerResponse, id: string): Promise<void> {
@@ -21,7 +21,7 @@ async function getUserById(req: IncomingMessage, res: ServerResponse, id: string
         res.end(JSON.stringify(user));
     }catch(error) {
         res.writeHead(500, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify({message: 'Server down'}));
+        res.end(JSON.stringify({message: 'Something went wrong on the server'}));
     };
 };
 
@@ -39,7 +39,7 @@ async function createUser(req: IncomingMessage, res: ServerResponse): Promise<vo
         res.end(JSON.stringify(newUser));
     } catch(error) {
         res.writeHead(500, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify({message: 'Server down'}));
+        res.end(JSON.stringify({message: 'Something went wrong on the server'}));
     };
 };
 
@@ -58,7 +58,7 @@ async function updateUser(req: IncomingMessage, res: ServerResponse, id: string)
         res.end(JSON.stringify(updUser));
     }catch(error) {
         res.writeHead(500, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify({message: 'Server down'}));
+        res.end(JSON.stringify({message: 'Something went wrong on the server'}));
     };
 };
 
@@ -70,7 +70,7 @@ async function deleteUser(req: IncomingMessage, res: ServerResponse, id: string)
         res.end(JSON.stringify({ message: `User ${id} removed` }));
     }catch(error) {
         res.writeHead(500, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify({message: 'Server down'}));
+        res.end(JSON.stringify({message: 'Something went wrong on the server'}));
     };
 };
 
@@ -81,4 +81,4 @@ export {
     createUser,
     updateUser,
     deleteUser
-}
+};
