@@ -28,7 +28,8 @@ Using the application
 1. GET 
     localhost:3000/api/users
 -------------------------------------------------------------------------------------------------
-    - Server should answer with status code 200 and all users records. If you don't have any users, server should return empty array.
+    - Server should answer with status code 200 and all users records. 
+    If you don't have any users, server should return empty array.
     GET | localhost:3000/api/users
     200 OK | 23 ms | 165 B
     []
@@ -50,7 +51,8 @@ Using the application
 2. POST
     localhost:3000/api/users
 -------------------------------------------------------------------------------------------------
-    - You have to send the request using JSON by setting the Content-Type to application/json. Your request body should contain the following fields:
+    - You have to send the request using JSON by setting the Content-Type to application/json.
+     Your request body should contain the following fields:
         - username as string
         - age as number
         - hobbies as array of strings or empty array
@@ -74,7 +76,8 @@ Using the application
         ]
     }
 -------------------------------------------------------------------------------------------------
-    - If you don't send the required fields, server should return status code 400 and JSON with error message.
+    - If you don't send the required fields, server should return status code 400 
+    and JSON with error message.
     400 Bad Request | 10 ms | 209 B
     {
         "message": "Missing required fields"
@@ -95,14 +98,16 @@ Using the application
         ]
     }
 -------------------------------------------------------------------------------------------------
-    - If userid is invalid, server should answer with status code 400 and corresponding message 
+    - If userid is invalid, server should answer with status code 400
+     and corresponding message 
     GET | localhost:3000/api/users/5426654
     400 Bad Request | 6 ms | 201 B
     {
         "message": "Invalid user id"
     }
 -------------------------------------------------------------------------------------------------
-    - If record with id === userId doesn't exist, server should answer with status code 404 and corresponding message
+    - If record with id === userId doesn't exist, server should answer with status code 404
+     and corresponding message
     GET | localhost:3000/api/users/2846dc23-5df4-4f33-b286-40eda3d4b405
     404 Not Found | 4 ms | 198 B
     {
@@ -112,7 +117,8 @@ Using the application
 4. PUT 
     localhost:3000/api/users/:id
 -------------------------------------------------------------------------------------------------
-    - You have to send the request using JSON by setting the Content-Type to application/json. Your request body should contain all required fields:
+    - You have to send the request using JSON by setting the Content-Type to application/json.
+     Your request body should contain all required fields:
         - username as string
         - age as number
         - hobbies as array of strings or empty array
@@ -136,14 +142,16 @@ Using the application
         ]
     }
 -------------------------------------------------------------------------------------------------
-    - If userid is invalid, server should answer with status code 400 and corresponding message 
+    - If userid is invalid, server should answer with status code 400
+     and corresponding message 
     PUT | localhost:3000/api/users/5426654
     400 Bad Request | 6 ms | 201 B
     {
         "message": "Invalid user id"
     }
 -------------------------------------------------------------------------------------------------
-    - If record with id === userId doesn't exist, server should answer with status code 404 and corresponding message
+    - If record with id === userId doesn't exist, server should answer with status code 404
+     and corresponding message
     PUT | localhost:3000/api/users/2846dc23-5df4-4f33-b286-40eda3d4b405
     404 Not Found | 4 ms | 198 B
     {
@@ -157,14 +165,16 @@ Using the application
     DELETE | localhost:3000/api/users/2846dc23-5df4-4f33-b286-40eda3d4b407
     204 No Content | 8 ms | 143 B
 -------------------------------------------------------------------------------------------------
-    - If userid is invalid, server should answer with status code 400 and corresponding message 
+    - If userid is invalid, server should answer with status code 400
+     and corresponding message 
     PUT | localhost:3000/api/users/5426654
     400 Bad Request | 6 ms | 201 B
     {
         "message": "Invalid user id"
     }
 -------------------------------------------------------------------------------------------------
-    - If record with id === userId doesn't exist, server should answer with status code 404 and corresponding message
+    - If record with id === userId doesn't exist, server should answer with status code 404
+     and corresponding message
     PUT | localhost:3000/api/users/2846dc23-5df4-4f33-b286-40eda3d4b405
     404 Not Found | 4 ms | 198 B
     {
@@ -173,7 +183,8 @@ Using the application
 -------------------------------------------------------------------------------------------------
 Other Errors
 
-1. If you have sent a request to non-existing endpoints (e.g. some-non/existing/resource), server should answer with status code 404 and corresponding message
+1. If you have sent a request to non-existing endpoints (e.g. some-non/existing/resource),
+ server should answer with status code 404 and corresponding message
 -------------------------------------------------------------------------------------------------
     GET | localhost:3000/some-non/existing/resource
     404 Not Found | 6 ms | 216 B
@@ -182,7 +193,8 @@ Other Errors
     }
 -------------------------------------------------------------------------------------------------
 
-2. If errors on the server side occur during the processing of a request, server should answer with status code 500 and corresponding message
+2. If errors on the server side occur during the processing of a request,
+ server should answer with status code 500 and corresponding message
 -------------------------------------------------------------------------------------------------
     500 Internal Server Error | 21 ms | 230 B
     {
