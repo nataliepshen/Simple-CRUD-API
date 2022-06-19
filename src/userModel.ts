@@ -1,5 +1,8 @@
-import { users, IUser, IUserWithoutId } from './usersData';
-import { v4 as uuidv4 } from 'uuid';
+import { IUser, IUserWithoutId } from './usersData';
+import { v4 as uuidv4, validate } from 'uuid';
+import { ServerResponse } from 'http';
+
+export let users: IUser[] = [];
 
 function findAll(): Promise<IUser[]> {
     return new Promise ((resolve, reject) => {
@@ -7,9 +10,16 @@ function findAll(): Promise<IUser[]> {
     });
 };
 
-function findById(id: string): Promise<IUser | undefined> {
+function findById(res: ServerResponse, id: string): Promise<IUser | undefined> {
     return new Promise((resolve, reject) => {
         const user = users.find((u) => u.id === id)
+        if (id && !validate(id)) {
+            res.writeHead(400, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ message: 'Invalid id' }));
+        } else if (!user) {
+            res.writeHead(404, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ message: 'User Not Found' }));
+        }
         resolve(user);
     })
 }
@@ -24,15 +34,15 @@ function create(user: IUserWithoutId): Promise<IUser> {
 
 function update(id: string, user: IUserWithoutId): Promise<IUser> {
     return new Promise((resolve, reject) => {
-        const index = users.findIndex((p) => p.id === id);
+        const index = users.findIndex((u) => u.id === id);
         users[index] = {id, ...user};
         resolve(users[index]);
     })
 }
 
-function remove(id: string, users: IUser[]): Promise<void> {
+function remove(id: string): Promise<void> {
     return new Promise((resolve, reject) => {
-        users = users.filter((p) => p.id !== id);
+        users = users.filter((u) => u.id !== id);
         resolve();
     })
 }
