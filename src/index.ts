@@ -18,7 +18,10 @@ const server = createServer((req, res) => {
   } else if (req.url?.match(/\/api\/users\/\w+/) && req.method === 'DELETE') {
     const id = req.url?.split('/')[3] as string;
     deleteUser(req, res, id);
-  } 
+  } else {
+    res.writeHead(404, {'Content-Type': 'application/json'});
+    res.end(JSON.stringify({ message: 'The requested URL does not exist' }));
+  }
 });
 
 const PORT: number = parseInt(process.env.PORT as string) || 4000;
