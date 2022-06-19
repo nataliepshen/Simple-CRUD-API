@@ -27,10 +27,13 @@ Using the application
 
 1. GET 
     localhost:3000/api/users
-
+-------------------------------------------------------------------------------------------------
     - Server should answer with status code 200 and all users records. If you don't have any users, server should return empty array.
+    ----------
     GET | localhost:3000/api/users
+    ----------
     200 OK | 23 ms | 165 B
+    ----------
     []
 
     - If you have some users, server should return array with users.
